@@ -1,0 +1,67 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<div class="jumbotron center">
+  <div style="text-align:center">
+      <h1>
+        {{title}}
+      </h1>
+      <form #form="ngForm" novalidate (ngSubmit)="calculate(form)">
+          <div class="form-group col-md-12">
+              <label for="operand1" class="col-md-12">Operand1</label>
+              <div class="col-md-3">&nbsp;</div>
+              <div class="col-md-6">
+                  <input id="operand1" name="operand1" class="form-control" type="text"
+                         [(ngModel)]="inputData.operand1" required appOperandValidator #operand1="ngModel">
+              </div>
+              <div *ngIf="operand1?.errors && submitted" class="text-danger col-md-12">
+                  <div [hidden]="!operand1.errors.required">
+                    Input is required
+                  </div>
+                  <div [hidden]="!operand1.errors.invalidOperand">
+                    {{operand1.errors.invalidOperand}}
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group col-md-12">
+              <label for="operand1" class="col-md-12">Operation</label>
+              <div class="col-md-3">&nbsp;</div>
+              <div class="col-md-6">
+                <input id="operation" name="operation" class="form-control" type="text"
+                       [(ngModel)]="inputData.operation" required appOperationValidator #operation="ngModel">
+              </div>
+              <div *ngIf="operation?.errors && submitted" class="text-danger col-md-12">
+                  <div [hidden]="!operation.errors.required">
+                    Input is required
+                  </div>
+                  <div [hidden]="!operation.errors.invalidOperation">
+                    {{operation.errors.invalidOperation}}
+                  </div>
+              </div>
+          </div>
+
+          <div class="form-group col-md-12">
+              <label for="operand1" class="col-md-12">Operand2</label>
+              <div class="col-md-3">&nbsp;</div>
+              <div class="col-md-6">
+                <input id="operand2" name="operand2" class="form-control" type="text"
+                       [(ngModel)]="inputData.operand2" required appOperandValidator #operand2="ngModel">
+              </div>
+              <div *ngIf="operand2?.errors && submitted" class="text-danger col-md-12">
+                  <div [hidden]="!operand2.errors.required">
+                    Input is required
+                  </div>
+                  <div [hidden]="!operand2.errors.invalidOperand">
+                    {{operand2.errors.invalidOperand}}
+                  </div>
+              </div>
+          </div>
+          <button type="button" class="btn btn-default" (click)="clear()">Clear</button>
+          <button type="submit" class="btn btn-default">Submit</button>
+      </form>
+      <div *ngIf="result">
+        <h3 class="result">
+          Result: {{result}}
+        </h3>
+      </div>
+  </div>
+</div>
